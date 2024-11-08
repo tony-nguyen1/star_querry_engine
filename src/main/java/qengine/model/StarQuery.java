@@ -1,14 +1,21 @@
 package qengine.model;
 
-import fr.boreal.model.logicalElements.api.Term;
-import fr.boreal.model.logicalElements.api.Variable;
-import fr.boreal.model.query.api.Query;
-
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import fr.boreal.model.formula.FOFormulas;
+import fr.boreal.model.formula.api.FOFormula;
+import fr.boreal.model.formula.api.FOFormulaConjunction;
+import fr.boreal.model.formula.factory.FOFormulaFactory;
+import fr.boreal.model.logicalElements.api.Term;
+import fr.boreal.model.logicalElements.api.Variable;
+import fr.boreal.model.query.api.FOQuery;
+import fr.boreal.model.query.api.Query;
+import fr.boreal.model.query.factory.FOQueryFactory;
 
 /**
  * Représentation d'une requête en étoile.
@@ -21,7 +28,7 @@ public class StarQuery implements Query {
     private final String label;
 
     // Collection des triplets RDF (les atomes de la requête)
-    private final Collection<RDFAtom> rdfAtoms;
+    private final List<RDFAtom> rdfAtoms;
 
     // variables réponses
     private final Collection<Variable> answerVariables;
@@ -38,7 +45,7 @@ public class StarQuery implements Query {
      * @throws NullPointerException     si l'un des paramètres est null
      * @throws IllegalArgumentException si les atomes RDF ne forment pas une requête en étoile
      */
-    public StarQuery(String label, Collection<RDFAtom> rdfAtoms, Collection<Variable> answerVariables) {
+    public StarQuery(String label, List<RDFAtom> rdfAtoms, Collection<Variable> answerVariables) {
         this.label = Objects.requireNonNull(label, "Le label ne peut pas être null.");
         this.rdfAtoms = Objects.requireNonNull(rdfAtoms, "Les triplets RDF ne peuvent pas être null.");
         this.answerVariables = Objects.requireNonNull(answerVariables, "Les variables réponses ne peuvent pas être null.");
@@ -129,8 +136,18 @@ public class StarQuery implements Query {
      *
      * @return la collection des triplets RDF
      */
-    public Collection<RDFAtom> getRdfAtoms() {
+    public List<RDFAtom> getRdfAtoms() {
         return rdfAtoms;
+    }
+
+    /**
+     * Convertit la requete en étoile en requete pour Integraal
+     *
+     * @return FOQuery
+     */
+    public FOQuery<FOFormulaConjunction> asFOQuery() {
+        FOFormulaConjunction conjunction = FOFormulaFactory.instance().createOrGetConjunction(this.rdfAtoms);
+        return FOQueryFactory.instance().createOrGetQuery(this.label, conjunction, this.answerVariables);
     }
 
     @Override

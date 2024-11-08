@@ -1,26 +1,28 @@
 package qengine.parser;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.stream.Stream;
+
+import org.eclipse.rdf4j.rio.RDFFormat;
+
 import fr.boreal.io.api.Parser;
 import fr.boreal.io.rdf.RDFParser;
 import fr.boreal.io.rdf.RDFTranslationMode;
 import fr.boreal.model.logicalElements.api.Atom;
 import fr.boreal.model.logicalElements.api.Predicate;
 import fr.boreal.model.logicalElements.factory.impl.SameObjectPredicateFactory;
-import org.eclipse.rdf4j.rio.RDFFormat;
 import qengine.model.RDFAtom;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 
 /**
  * Parser pour transformer des triplets RDF en RDFAtom.
  */
 public class RDFAtomParser implements Parser<RDFAtom> {
 
-    private static final Predicate TRIPLE_PREDICATE =
-            SameObjectPredicateFactory.instance().createOrGetPredicate("triple", 3);
+    private static final Predicate TRIPLE_PREDICATE = SameObjectPredicateFactory.instance()
+            .createOrGetPredicate("triple", 3);
 
     private final RDFParser parser;
 
@@ -52,6 +54,10 @@ public class RDFAtomParser implements Parser<RDFAtom> {
     @Override
     public void close() {
         parser.close();
+    }
+
+    public Stream<RDFAtom> getRDFAtoms() {
+        return this.streamParsedObjects(RDFAtom.class);
     }
 
     private static RDFFormat getRDFFormat(File file) {

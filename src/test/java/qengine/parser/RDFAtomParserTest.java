@@ -5,6 +5,8 @@ import qengine.model.RDFAtom;
 import qengine.parser.RDFAtomParser;
 
 import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,4 +73,26 @@ class RDFAtomParserTest {
             assertThrows(IllegalArgumentException.class, parser::next, "Un appel à next() sans triplets restants devrait lever une exception.");
         }
     }
+
+    @Test
+    void testGetRDFAtoms() throws Exception {
+        File rdfFile = new File("src/test/resources/sample_data.nt");
+        try (RDFAtomParser parser = new RDFAtomParser(rdfFile)) {
+            // Utiliser la méthode getRDFAtoms pour récupérer les atomes
+            List<RDFAtom> rdfAtoms = parser.getRDFAtoms().collect(Collectors.toList());
+
+            // Vérifier que les atomes ont été correctement parsés
+            assertEquals(2, rdfAtoms.size(), "Le nombre d'atomes RDF doit être 2.");
+
+            // Vérifier le contenu des atomes
+            assertEquals("http://example.org/subject1", rdfAtoms.get(0).getTripleSubject().label(), "Sujet incorrect pour le premier atome.");
+            assertEquals("http://example.org/predicate1", rdfAtoms.get(0).getTriplePredicate().label(), "Prédicat incorrect pour le premier atome.");
+            assertEquals("http://example.org/object1", rdfAtoms.get(0).getTripleObject().label(), "Objet incorrect pour le premier atome.");
+
+            assertEquals("http://example.org/subject2", rdfAtoms.get(1).getTripleSubject().label(), "Sujet incorrect pour le deuxième atome.");
+            assertEquals("http://example.org/predicate2", rdfAtoms.get(1).getTriplePredicate().label(), "Prédicat incorrect pour le deuxième atome.");
+            assertEquals("http://example.org/object2", rdfAtoms.get(1).getTripleObject().label(), "Objet incorrect pour le deuxième atome.");
+        }
+    }
+
 }

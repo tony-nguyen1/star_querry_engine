@@ -26,13 +26,37 @@ public class RDFHexaStoreTest {
     private static final Variable VAR_X = SameObjectTermFactory.instance().createOrGetVariable("?x");
     private static final Variable VAR_Y = SameObjectTermFactory.instance().createOrGetVariable("?y");
 
-    @Test
-    public void testAddRDFAtom() {
-        throw new NotImplementedException();
-    }
 
     @Test
     public void testAddAllRDFAtoms() {
+        RDFHexaStore store = new RDFHexaStore();
+
+        // Version stream
+        // Ajouter plusieurs RDFAtom
+        RDFAtom rdfAtom1 = new RDFAtom(SUBJECT_1, PREDICATE_1, OBJECT_1);
+        RDFAtom rdfAtom2 = new RDFAtom(SUBJECT_2, PREDICATE_2, OBJECT_2);
+
+        Set<RDFAtom> rdfAtoms = Set.of(rdfAtom1, rdfAtom2);
+
+        assertTrue(store.addAll(rdfAtoms.stream()), "Les RDFAtoms devraient être ajoutés avec succès.");
+
+        // Vérifier que tous les atomes sont présents
+        Collection<Atom> atoms = store.getAtoms();
+        assertTrue(atoms.contains(rdfAtom1), "La base devrait contenir le premier RDFAtom ajouté.");
+        assertTrue(atoms.contains(rdfAtom2), "La base devrait contenir le second RDFAtom ajouté.");
+
+        // Version collection
+        store = new RDFHexaStore();
+        assertTrue(store.addAll(rdfAtoms), "Les RDFAtoms devraient être ajoutés avec succès.");
+
+        // Vérifier que tous les atomes sont présents
+        atoms = store.getAtoms();
+        assertTrue(atoms.contains(rdfAtom1), "La base devrait contenir le premier RDFAtom ajouté.");
+        assertTrue(atoms.contains(rdfAtom2), "La base devrait contenir le second RDFAtom ajouté.");
+    }
+
+    @Test
+    public void testAddRDFAtom() {
         throw new NotImplementedException();
     }
 
@@ -42,22 +66,8 @@ public class RDFHexaStoreTest {
     }
 
     @Test
-    public void testAddCollection() {
-        RDFHexaStore store = new RDFHexaStore();
-
-        // Créer une collection d'atomes RDF
-        RDFAtom rdfAtom1 = new RDFAtom(SUBJECT_1, PREDICATE_1, OBJECT_1);
-        RDFAtom rdfAtom2 = new RDFAtom(SUBJECT_2, PREDICATE_2, OBJECT_2);
-
-        Set<RDFAtom> conjunction = Set.of(rdfAtom1, rdfAtom2);
-
-        // Ajouter la collection
-        assertTrue(store.addAll(conjunction.stream()), "La conjonction d'atomes devrait être ajoutée avec succès.");
-
-        // Vérifier que tous les atomes de la collection sont présents
-        Collection<Atom> atoms = store.getAtoms();
-        assertTrue(atoms.contains(rdfAtom1), "La base devrait contenir le premier RDFAtom de la conjonction.");
-        assertTrue(atoms.contains(rdfAtom2), "La base devrait contenir le second RDFAtom de la conjonction.");
+    public void testSize() {
+        throw new NotImplementedException();
     }
 
     @Test

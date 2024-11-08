@@ -1,9 +1,11 @@
 package qengine.model;
 
+import fr.boreal.model.formula.api.FOFormulaConjunction;
 import fr.boreal.model.logicalElements.api.Term;
 import fr.boreal.model.logicalElements.api.Variable;
 import fr.boreal.model.logicalElements.factory.api.TermFactory;
 import fr.boreal.model.logicalElements.factory.impl.SameObjectTermFactory;
+import fr.boreal.model.query.api.FOQuery;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -177,5 +179,42 @@ class StarQueryTest {
         assertNotEquals(query, queryWithNoAnswerVariables, "Deux requêtes avec des answerVariables différentes ne doivent pas être égales.");
     }
 
+    @Test
+    void testAsFOQuery() {
+        Variable centralVariable = termFactory.createOrGetVariable("?v0");
+        Term predicate1 = termFactory.createOrGetLiteral("http://example.org/predicate1");
+        Term object1 = termFactory.createOrGetLiteral("http://example.org/object1");
+
+        Term predicate2 = termFactory.createOrGetLiteral("http://example.org/predicate2");
+        Term object2 = termFactory.createOrGetLiteral("http://example.org/object2");
+
+        // Création des RDFAtoms
+        RDFAtom atom1 = new RDFAtom(centralVariable, predicate1, object1);
+        RDFAtom atom2 = new RDFAtom(centralVariable, predicate2, object2);
+
+        List<RDFAtom> rdfAtoms = List.of(atom1, atom2);
+        Collection<Variable> answerVariables = List.of(centralVariable);
+
+        // Création de la requête étoile
+        StarQuery starQuery = new StarQuery("Requête étoile", rdfAtoms, answerVariables);
+
+        // Conversion en FOQuery
+        FOQuery<FOFormulaConjunction> foQuery = starQuery.asFOQuery();
+
+        // Vérifications
+        assertNotNull(foQuery, "La requête FOQuery ne doit pas être null.");
+        assertEquals("Requête étoile", foQuery.getLabel(), "Le label de la requête FOQuery doit correspondre au label de la requête étoile.");
+
+        // Vérifier que la conjonction contient les RDFAtoms correctement
+        FOFormulaConjunction conjunction = foQuery.getFormula();
+        assertEquals(2, conjunction.asAtomSet().size(), "La conjonction doit contenir deux atomes.");
+
+        // Vérification des termes dans la conjonction
+        assertTrue(conjunction.asAtomSet().contains(atom1), "La conjonction doit contenir atom1.");
+        assertTrue(conjunction.asAtomSet().contains(atom2), "La conjonction doit contenir atom2.");
+
+        // Vérification des variables de réponse
+        assertEquals(answerVariables, foQuery.getAnswerVariables(), "Les variables de réponse doivent être les mêmes que celles de la requête étoile.");
+    }
 
 }

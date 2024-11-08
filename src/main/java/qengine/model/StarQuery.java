@@ -1,14 +1,5 @@
 package qengine.model;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import fr.boreal.model.formula.FOFormulas;
-import fr.boreal.model.formula.api.FOFormula;
 import fr.boreal.model.formula.api.FOFormulaConjunction;
 import fr.boreal.model.formula.factory.FOFormulaFactory;
 import fr.boreal.model.logicalElements.api.Term;
@@ -16,6 +7,9 @@ import fr.boreal.model.logicalElements.api.Variable;
 import fr.boreal.model.query.api.FOQuery;
 import fr.boreal.model.query.api.Query;
 import fr.boreal.model.query.factory.FOQueryFactory;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Représentation d'une requête en étoile.
@@ -170,9 +164,9 @@ public class StarQuery implements Query {
     public String toString() {
         return "StarQuery{" +
                 "label='" + label + '\'' +
-                ", rdfAtoms=" + rdfAtoms +
-                ", answerVariables=" + answerVariables +
-                ", centralVariable=" + centralVariable +
+                ",\n\t rdfAtoms=" + rdfAtoms +
+                ",\n\t answerVariables=" + answerVariables +
+                ",\n\t centralVariable=" + centralVariable +
                 '}';
     }
 }

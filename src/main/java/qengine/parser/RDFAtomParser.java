@@ -56,6 +56,11 @@ public class RDFAtomParser implements Parser<RDFAtom> {
         parser.close();
     }
 
+    /**
+     * Retourne un flux de tous les atomes RDF parsés.
+     *
+     * @return un flux de RDFAtom
+     */
     public Stream<RDFAtom> getRDFAtoms() {
         return this.streamParsedObjects(RDFAtom.class);
     }

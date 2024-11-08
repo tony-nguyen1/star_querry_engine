@@ -1,8 +1,11 @@
 package qengine.model;
 
+import fr.boreal.model.logicalElements.api.Atom;
 import fr.boreal.model.logicalElements.api.Term;
 import fr.boreal.model.logicalElements.factory.api.TermFactory;
+import fr.boreal.model.logicalElements.factory.impl.SameObjectPredicateFactory;
 import fr.boreal.model.logicalElements.factory.impl.SameObjectTermFactory;
+import fr.boreal.model.logicalElements.impl.AtomImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -73,7 +76,7 @@ class RDFAtomTest {
         RDFAtom rdfAtom = new RDFAtom(subject, predicate, object);
 
         // Vérification du toString
-        String expected = "triple(http://example.org/subject,http://example.org/predicate,http://example.org/object)";
+        String expected = "<http://example.org/subject, http://example.org/predicate, http://example.org/object>";
         assertEquals(expected, rdfAtom.toString(), "La méthode toString doit produire une représentation correcte de l'atome RDF.");
     }
 
@@ -130,6 +133,92 @@ class RDFAtomTest {
         assertEquals("triple", rdfAtom.getPredicate().label(), "Le prédicat doit être 'triple'.");
         assertEquals(3, rdfAtom.getPredicate().arity(), "L'arité du prédicat doit être 3.");
         assertArrayEquals(terms.toArray(), rdfAtom.getTerms(), "Les termes doivent être correctement attribués.");
+    }
+
+    @Test
+    void testRDFAtomConstructorFromAtom() {
+        // Préparation d'un atome
+        Term subject = termFactory.createOrGetLiteral("http://example.org/subject");
+        Term predicate = termFactory.createOrGetLiteral("http://example.org/predicate");
+        Term object = termFactory.createOrGetLiteral("http://example.org/object");
+
+        // Création de l'atome d'origine
+        Atom baseAtom = new AtomImpl(
+                SameObjectPredicateFactory.instance().createOrGetPredicate("triple", 3),
+                subject, predicate, object);
+
+        // Création de l'instance RDFAtom à partir de l'atom
+        RDFAtom rdfAtom = new RDFAtom(baseAtom);
+
+        // Assertions
+        assertEquals(3, rdfAtom.getTerms().length, "L'atome RDF doit contenir exactement 3 termes.");
+        assertEquals("triple", rdfAtom.getPredicate().label(), "Le prédicat doit être 'triple'.");
+        assertEquals(3, rdfAtom.getPredicate().arity(), "L'arité du prédicat doit être 3.");
+        assertEquals(subject, rdfAtom.getTripleSubject(), "Le sujet doit correspondre au terme 0.");
+        assertEquals(predicate, rdfAtom.getTriplePredicate(), "Le prédicat doit correspondre au terme 1.");
+        assertEquals(object, rdfAtom.getTripleObject(), "L'objet doit correspondre au terme 2.");
+    }
+
+    @Test
+    void testGetTripleSubject() {
+        // Préparation des termes
+        Term subject = termFactory.createOrGetLiteral("http://example.org/subject");
+        Term predicate = termFactory.createOrGetLiteral("http://example.org/predicate");
+        Term object = termFactory.createOrGetLiteral("http://example.org/object");
+
+        // Création de l'atome RDF
+        RDFAtom rdfAtom = new RDFAtom(subject, predicate, object);
+
+        // Vérification de la méthode getTripleSubject
+        assertEquals(subject, rdfAtom.getTripleSubject(), "La méthode getTripleSubject doit retourner le sujet.");
+    }
+
+    @Test
+    void testGetTriplePredicate() {
+        // Préparation des termes
+        Term subject = termFactory.createOrGetLiteral("http://example.org/subject");
+        Term predicate = termFactory.createOrGetLiteral("http://example.org/predicate");
+        Term object = termFactory.createOrGetLiteral("http://example.org/object");
+
+        // Création de l'atome RDF
+        RDFAtom rdfAtom = new RDFAtom(subject, predicate, object);
+
+        // Vérification de la méthode getTriplePredicate
+        assertEquals(predicate, rdfAtom.getTriplePredicate(), "La méthode getTriplePredicate doit retourner le prédicat.");
+    }
+
+    @Test
+    void testGetTripleObject() {
+        // Préparation des termes
+        Term subject = termFactory.createOrGetLiteral("http://example.org/subject");
+        Term predicate = termFactory.createOrGetLiteral("http://example.org/predicate");
+        Term object = termFactory.createOrGetLiteral("http://example.org/object");
+
+        // Création de l'atome RDF
+        RDFAtom rdfAtom = new RDFAtom(subject, predicate, object);
+
+        // Vérification de la méthode getTripleObject
+        assertEquals(object, rdfAtom.getTripleObject(), "La méthode getTripleObject doit retourner l'objet.");
+    }
+
+    @Test
+    void testRDFAtomConstructorFromInvalidAtom() {
+        // Préparation d'un atome avec un prédicat non valide
+        Term subject = termFactory.createOrGetLiteral("http://example.org/subject");
+        Term predicate = termFactory.createOrGetLiteral("http://example.org/invalidPredicate");
+        Term object = termFactory.createOrGetLiteral("http://example.org/object");
+
+        // Création de l'atome d'origine
+        Atom baseAtom = new AtomImpl(
+                SameObjectPredicateFactory.instance().createOrGetPredicate("notValid", 3),
+                subject, predicate, object);
+
+        // Vérification qu'une exception est levée lors de la création d'un RDFAtom
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new RDFAtom(baseAtom); // Devrait lever une exception
+        });
+
+        assertTrue(exception.getMessage().contains("Not a triple."), "Le message d'erreur doit indiquer que l'atome n'est pas un triple.");
     }
 
 }

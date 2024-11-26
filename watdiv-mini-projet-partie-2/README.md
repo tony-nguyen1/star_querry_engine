@@ -29,8 +29,8 @@ Précisément, les performances de votre système doivent être comparées en ut
 
 ## Préparation des bancs d'essais
 
-1. Utiliser la version de WatDiv mise à disposition sur Moodle pour générer des bases de données de tailles différentes, ainsi que des jeux de requêtes pour vos tests.  
-   - **Pour générer des données** : Compilez WatDiv (C++) selon les instructions sur [Moodle](https://moodle.umontpellier.fr/course/view.php?id=1126#section-5) ou sur le [site de WatDiv](https://dsg.uwaterloo.ca/watdiv/#installation). Vérifiez que la bibliothèque **BOOST** est installée.
+1. Utiliser la version de WatDiv mise à disposition pour générer des bases de données de tailles différentes, ainsi que des jeux de requêtes pour vos tests.  
+   - **Pour générer des données** : Compilez WatDiv (C++) selon les instructions ci-dessous ou sur le [site de WatDiv](https://dsg.uwaterloo.ca/watdiv/#installation). Vérifiez que la bibliothèque **BOOST** est installée.
    - **Format des données** : WatDiv génère des fichiers au format N3. Si nécessaire, utilisez [rdf2rdf](http://www.l3s.de/~minack/rdf2rdf/) pour les convertir en RDF/XML.
    - **Pour générer des requêtes** : Modifiez le script `regenerate_queryset.sh` pour ajuster le nombre de requêtes par template (par défaut : 100).  
      Des patrons de requêtes sont disponibles dans :

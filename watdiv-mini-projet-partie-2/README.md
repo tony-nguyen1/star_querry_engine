@@ -8,12 +8,13 @@ Précisément, les performances de votre système doivent être comparées en ut
 1. La dernière version de Jena.
 2. Une implémentation réalisée par vos collègues (à vous de choisir laquelle).  
 
-Les réponses aux questions suivantes doivent être incluses dans le rapport final du projet, que vous pouvez organiser librement.
-
 ## Travail à rendre
 
 1. Analyse des bancs d'essai et plan des tests à réaliser : **5 décembre**.
 2. Réalisation des tests et document final : **15 décembre**.
+
+---
+**Les réponses aux questions suivantes doivent être incluses dans le rapport final du projet, que vous pouvez organiser librement.**
 
 ---
 

@@ -128,3 +128,90 @@ L’évaluation des requêtes en étoile comprend 4 étapes :
 4. **Accès aux données et visualisation des résultats**.
 
 ---
+---
+
+## L’évaluation des requêtes
+
+Nous identifions quatre étapes fondamentales dans l’évaluation des requêtes en étoile :
+
+1. **Le chargement des triplets** (déjà implémenté) et leur encodage dans un dictionnaire (à implémenter).  
+2. **Création de l’hexastore** avec ses indexes.  
+3. **Lecture des requêtes en entrée** (en utilisant le parser de requêtes en étoile déjà implémenté).  
+4. **Accès aux données et visualisation des résultats**.
+
+---
+
+### Important
+
+Pour chaque étape que vous devez implémenter, vous devez au préalable écrire des tests unitaires pour chaque méthode. Suivez les étapes ci-dessous :  
+
+1. Écrivez le résultat attendu pour différentes entrées, en traitant tous les cas limites.  
+2. Rédigez le test unitaire correspondant avant d’implémenter la méthode.  
+3. Utilisez ces tests pour vérifier la correction de votre implémentation.  
+4. Assurez-vous que vos tests couvrent toutes les branches d’exécution de la méthode en utilisant la fonctionnalité de couverture du code (*code coverage*) de votre IDE.
+
+---
+
+## Étapes détaillées
+
+### Le dictionnaire (rendu 15 Novembre)
+
+Le dictionnaire associe un entier à chaque ressource de la base RDF, permettant un stockage compact.  
+Par exemple :  
+- Les triplets `<Bob, knows, Bob>` et `<1,2,1>` peuvent être vus comme équivalents avec la correspondance `{(1, Bob), (2, knows)}`.  
+
+Le dictionnaire doit permettre d’encoder et de décoder les triplets de manière efficace.
+
+- **Lien avec le code :** Le dictionnaire est utilisé par la méthode `add(RDFAtom a)` de l’Hexastore.
+
+---
+
+### L’index (rendu 15 Novembre)
+
+L’index permet une évaluation efficace des requêtes et est adapté au système de persistance choisi.  
+
+Dans ce projet, il est demandé d’implémenter l’approche **hexastore** pour l’indexation des données.
+
+- **Lien avec le code :**
+  - La méthode `add(RDFAtom a)` de l’Hexastore est utilisée pour l’insertion de données.  
+  - La méthode `match(RDFAtom a)` est utilisée pour l’interrogation des données.
+
+---
+
+### L’accès aux données (rendu 29 Novembre)
+
+L’accès aux données se fait par les structures de données mises en œuvre. Une fois les solutions pour le premier patron de triplet trouvées, elles serviront à filtrer les valeurs récupérées pour les patrons suivants.
+
+- **Lien avec le code :**  
+  - Implémentez une méthode spécifique pour l’évaluation des requêtes en étoile.  
+  - Cette évaluation est utilisée par la méthode `match(StarQuery q)` de l’Hexastore.
+
+---
+
+### Vérification de correction et complétude (rendu 29 Novembre)
+
+Vous devez implémenter une procédure qui compare les résultats de votre système avec ceux d’InteGraal (considéré comme un "oracle"). Cela permet de vérifier la correction et la complétude de votre système, une étape fondamentale avant d’analyser ses performances.
+
+- **Comment faire :**  
+  - Utilisez `SimpleInMemoryGraphStore` pour le stockage des triplets.  
+  - Convertissez une requête en étoile en requête évaluable avec la méthode `asFOQuery` de la classe `StarQuery`.
+
+- **Exemple :** Consultez la classe `Example` dans le squelette fourni.
+
+---
+
+## Consignes supplémentaires
+
+1. Implémentez l’indexation et l’accès aux données du moteur de requêtes.  
+2. Les données seront stockées en mémoire vive (RAM).  
+   - **Note :** Un système de persistance en mémoire secondaire peut être envisagé comme extension du projet.
+
+---
+
+### Lecture des entrées et export des résultats
+
+1. Consultez le squelette du programme dans le dépôt Git. La classe `Example` montre comment lire un fichier de données.  
+2. Votre système doit évaluer un ensemble de requêtes (et non une seule) sur un fichier de données unique.  
+3. Les résultats doivent être exportés dans un répertoire dédié.
+
+---

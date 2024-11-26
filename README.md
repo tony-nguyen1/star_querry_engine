@@ -1,93 +1,132 @@
-# NoSQL engine skeleton
 
+# HAI914I - Un moteur d’évaluation de requêtes en étoile
 
+## Auteurs
+- <federico.ulliana@inria.fr>
+- <guillaume.perution-kihli@inria.fr>
 
-## Getting started
+---
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Objectif
+L’objectif du TD est d’implémenter l’approche hexastore pour l’interrogation des données RDF vue en cours, ainsi que les procédures nécessaires à l’évaluation de requêtes en étoile (exprimées en syntaxe SPARQL) qui seront introduites par la suite.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Le TD suivant sera dédié à l’évaluation des performances du système réalisé. Votre prototype sera comparé avec l’évaluateur de requêtes du logiciel libre InteGraal. De plus, InteGraal peut être considéré comme un système “oracle” pour vérifier la correction et la complétude de votre moteur, c’est-à-dire, vérifier que votre moteur donne toutes et seules les bonnes réponses à une requête. Celle-ci est évidemment une condition nécessaire à la conduite d’expériences.
 
-## Add your files
+---
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Consignes
+- Le TD se fait en groupes de 1 ou 2 personnes.
+- Lorsque vous avez décidé quel sera votre groupe, inscrivez-vous dans le tableau suivant :  
+  [Google Sheet](https://docs.google.com/spreadsheets/d/1bQY-Xba11DNcbCC5gujvPnidhajN-Kcb306PjXveF7M/edit?usp=sharing)
+- Le langage de programmation est imposé : **Java**.
 
+---
+
+## Projet : Dates de rendu
+1. **Dictionnaire, index (Hexastore)** : rendu du code (pas de rapport) - **15 Novembre**.  
+2. **Évaluation des requêtes en étoile** : code + rapport (3 pages) - **29 Novembre**.  
+3. **Analyse des performances** : code + rapport (5 pages) - **13 Décembre**.
+
+**Note :** Il n’y aura pas de soutenance, mais il sera demandé aux groupes d’expliquer le travail réalisé lors des séances de TD. La présence en TD est obligatoire.
+
+---
+
+## Évaluation
+Les points suivants seront évalués :
+- Travail réalisé (code fonctionnel, implémentation des fonctionnalités).
+- Qualité du code produit (taux de couverture du code par des tests unitaires).
+- Clarté et concision du rapport.
+
+---
+
+## Point de départ du projet logiciel
+Un squelette du projet est disponible dans ce dépôt Git :  
+[Nosql Engine Skeleton](https://gitlab.etu.umontpellier.fr/p00000415795/nosql-engine-skeleton)
+
+Vous pouvez réutiliser ce projet (ce qui est conseillé), ou juste l’étudier comme exemple. Pour s’assurer que tout fonctionne bien, exécutez le programme dans la classe **Example.java**.
+
+### Description des principales classes fournies
+- **Example.java** : montre comment lire les données et les requêtes depuis des fichiers via des parseurs dédiés.
+- **RDFAtom.java** : représente des triplets RDF.
+- **StarQuery.java** : représente des requêtes en étoile.
+- **RDFStorage.java** : une interface décrivant le contrat (ensemble des méthodes supportées) d’un objet Hexastore.
+
+### IDE recommandé
+1. Installez **Eclipse IDE for Java Developers** :  
+   [Lien Moodle](https://moodle.umontpellier.fr/mod/page/view.php?id=131074)
+2. Vous pouvez aussi utiliser **IntelliJ IDEA** (version communautaire ou Ultimate avec une licence étudiante) :  
+   [Télécharger IntelliJ](https://www.jetbrains.com/idea/download/?section=linux)
+
+---
+
+## Version de Java
+Le projet utilise **Java 21**. Vous êtes libres d’utiliser une version plus récente si vous êtes à l’aise avec l’environnement Java, mais ne perdez pas de temps sur des considérations techniques.
+
+---
+
+## Dépendances Java avec Maven
+Le projet utilise **Maven** pour la gestion des dépendances. Importez le projet dans votre IDE avec "Import Maven Project". Le fichier `pom.xml` contient toutes les bibliothèques nécessaires.
+
+Si Eclipse ne charge pas correctement les dépendances Maven :
+1. Dans **Package Explorer**, clic droit sur le projet.
+2. Allez dans **Configure > Convert to Maven Project**.
+
+### Bibliothèques externes utilisées
+- **rdf4j 3.7.3** : pour lire les données RDF et les requêtes SPARQL.  
+  [Documentation RDF4J](https://rdf4j.org/documentation)  
+  [Javadoc RDF4J](https://rdf4j.org/javadoc/latest/)  
+- **InteGraal 1.6.0** : utilisé comme base pour les implémentations et pour les comparaisons.  
+  [Site InteGraal](https://rules.gitlabpages.inria.fr/integraal-website/)
+
+---
+
+## Tests unitaires
+Des tests unitaires sont fournis dans `src/test/java`. Ils permettent de mieux comprendre le comportement attendu des objets.
+
+### Jeu de données et requêtes
+Dans le répertoire `data/`, des fichiers sont fournis pour les tests :  
+- **sample_data.nt** : données de micro-tests.  
+- **sample_query.queryset** : requêtes pour micro-tests.  
+- **100K.nt** et **STAR_ALL_workload.queryset** : plus de données et de requêtes.
+
+---
+
+## Requêtes en étoile
+Les requêtes en étoile sont des requêtes SPARQL composées de `n` patrons de triplets partageant une même variable.  
+Exemple :  
+```sparql
+SELECT ?x WHERE { ?x p1 o1 . ?x p2 o2 . ?x p3 o3 }
 ```
-cd existing_repo
-git remote add origin https://gitlab.etu.umontpellier.fr/p00000415795/nosql-engine-skeleton.git
-git branch -M main
-git push -uf origin main
+Représentation graphique :
+```
+       o1       o2       o3
+        |        |        |
+p1 ---- ?x ---- p2 ---- p3
 ```
 
-## Integrate with your tools
+### Exemples de requêtes
+1. **Quels écrivains ayant reçu un prix Nobel sont aussi des peintres ?**
+   ```sparql
+   SELECT ?x WHERE { ?x type peintre . ?x won_prize Nobel . ?x type écrivain }
+   ```
+2. **Quels artistes nés en 1904 ont vécu à Paris ?**  
+   Paramètres :  
+   - `p1 = type, o1 = artiste`  
+   - `p2 = lives_in, o2 = Paris`  
+   - `p3 = birth_year, o3 = 1904`  
+3. **Qui sont les amis d’Alice qui aiment le cinéma ?**
+   ```sparql
+   SELECT ?x WHERE { ?x friendOf Alice . ?x likes Movies }
+   ```
 
-- [ ] [Set up project integrations](https://gitlab.etu.umontpellier.fr/p00000415795/nosql-engine-skeleton/-/settings/integrations)
+---
 
-## Collaborate with your team
+## Évaluation des requêtes
+L’évaluation des requêtes en étoile comprend 4 étapes :
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+1. **Chargement des triplets** (déjà implémenté) et encodage dans un dictionnaire.
+2. **Création de l’hexastore** avec ses indexes.
+3. **Lecture des requêtes** (parser fourni).
+4. **Accès aux données et visualisation des résultats**.
 
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+---

@@ -16,8 +16,7 @@ Le TD suivant sera dédié à l’évaluation des performances du système réal
 
 ## Consignes
 - Le TD se fait en groupes de 1 ou 2 personnes.
-- Lorsque vous avez décidé quel sera votre groupe, inscrivez-vous dans le tableau suivant :  
-  [Google Sheet](https://docs.google.com/spreadsheets/d/1bQY-Xba11DNcbCC5gujvPnidhajN-Kcb306PjXveF7M/edit?usp=sharing)
+- Lorsque vous avez décidé quel sera votre groupe, inscrivez-vous dans le [tableau suivant](https://docs.google.com/spreadsheets/d/1bQY-Xba11DNcbCC5gujvPnidhajN-Kcb306PjXveF7M/edit?usp=sharing)
 - Le langage de programmation est imposé : **Java**.
 
 ---
@@ -40,8 +39,7 @@ Les points suivants seront évalués :
 ---
 
 ## Point de départ du projet logiciel
-Un squelette du projet est disponible dans ce dépôt Git :  
-[Nosql Engine Skeleton](https://gitlab.etu.umontpellier.fr/p00000415795/nosql-engine-skeleton)
+Un squelette du projet est disponible dans ce dépôt git.
 
 Vous pouvez réutiliser ce projet (ce qui est conseillé), ou juste l’étudier comme exemple. Pour s’assurer que tout fonctionne bien, exécutez le programme dans la classe **Example.java**.
 
@@ -99,9 +97,9 @@ SELECT ?x WHERE { ?x p1 o1 . ?x p2 o2 . ?x p3 o3 }
 ```
 Représentation graphique :
 ```
-       o1       o2       o3
-        |        |        |
-p1 ---- ?x ---- p2 ---- p3
+       -- p2 --- o2 
+ ?x --- p1 --- o1 
+       -- p3 --- o3 
 ```
 
 ### Exemples de requêtes

@@ -97,9 +97,9 @@ SELECT ?x WHERE { ?x p1 o1 . ?x p2 o2 . ?x p3 o3 }
 ```
 Représentation graphique :
 ```
-       -- p2 --- o2 
+  -- p2 --- o2 
  ?x --- p1 --- o1 
-       -- p3 --- o3 
+  -- p3 --- o3 
 ```
 
 ### Exemples de requêtes

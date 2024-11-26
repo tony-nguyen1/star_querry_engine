@@ -5,7 +5,7 @@
 L'objectif de cette deuxième partie du projet est d'évaluer et analyser les performances de votre prototype.  
 Précisément, les performances de votre système doivent être comparées en utilisant le benchmark WatDiv avec :
 
-1. La dernière version de Jena.
+1. La dernière version de InteGraal.
 2. Une implémentation réalisée par vos collègues (à vous de choisir laquelle).  
 
 ## Travail à rendre
@@ -39,6 +39,7 @@ Précisément, les performances de votre système doivent être comparées en ut
 
 2. Créer un jeu de tests pour :
    - Les requêtes **en étoile**.
+      - Les requêtes **générales**.
 
    ⚠️ La validité des expériences dépend de ce passage clé. Vous devrez générer plusieurs requêtes avec WatDiv.
 
@@ -69,7 +70,7 @@ Précisément, les performances de votre système doivent être comparées en ut
 1. Pour quelles métriques est-il préférable d’effectuer des mesures **“cold”** ou **“warm”** (ou les deux) ?  
 2. Comment allez-vous réaliser ces mesures en pratique ?  
 3. Proposez une procédure pour vérifier la correction et la complétude de votre système.  
-   - Tester les systèmes sur des requêtes en étoile et sur des requêtes générales.
+   - Tester les systèmes sur des requêtes en étoile et, si votre système le permet, sur des requêtes générales.
 4. Réalisez une expérience **2²** en faisant varier la taille des données et la mémoire. Que pouvez-vous conclure ?  
 5. Planifiez une expérience **2²** (ou plusieurs) pour analyser l’impact des optimisations. Les optimisations sont-elles effectives ? Expliquez vos résultats.  
 
@@ -78,7 +79,7 @@ Précisément, les performances de votre système doivent être comparées en ut
    - Calculez l’importance des facteurs via un modèle de régression et interprétez les résultats.
 
 6. Vérifiez si l’ordre d’évaluation des requêtes dans le workload joue un rôle dans l’analyse des performances.
-7. Comparez votre système avec **Jena** et avec une implémentation concurrente sur des requêtes en étoile et générales.  
+7. Comparez votre système avec **InteGraal** et avec une implémentation concurrente sur des requêtes en étoile.  
    - Quelles conclusions pouvez-vous en tirer ? Expliquez les résultats.  
 8. Dans le système concurrent choisi :
    - Les mesures sont-elles réalisées de manière comparable (vérifiez le code source) ?
@@ -112,7 +113,7 @@ make
 bin/Release/watdiv -d model/wsdbm-data-model.txt 1
 ```
 
-Pour générer des requêtes :
+**Pour générer des requêtes** :
 
 Modifiez les patrons de requêtes dans le répertoire `testsuite/templates`.
 Modifiez puis exécutez le script `regenerate_queryset.sh` (par exemple, modifiez le nombre de requêtes générées par patron, actuellement fixé à 100).

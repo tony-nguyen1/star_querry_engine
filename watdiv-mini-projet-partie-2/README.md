@@ -39,7 +39,6 @@ Précisément, les performances de votre système doivent être comparées en ut
 
 2. Créer un jeu de tests pour :
    - Les requêtes **en étoile**.
-   - Les requêtes **générales**.
 
    ⚠️ La validité des expériences dépend de ce passage clé. Vous devrez générer plusieurs requêtes avec WatDiv.
 

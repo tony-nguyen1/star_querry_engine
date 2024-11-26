@@ -12,7 +12,7 @@ Les réponses aux questions suivantes doivent être incluses dans le rapport fin
 
 ## Travail à rendre
 
-1. Analyse des bancs d'essai et plan des tests à réaliser : **1er décembre**.
+1. Analyse des bancs d'essai et plan des tests à réaliser : **5 décembre**.
 2. Réalisation des tests et document final : **15 décembre**.
 
 ---

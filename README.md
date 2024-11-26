@@ -119,17 +119,6 @@ Représentation graphique :
 
 ---
 
-## Évaluation des requêtes
-L’évaluation des requêtes en étoile comprend 4 étapes :
-
-1. **Chargement des triplets** (déjà implémenté) et encodage dans un dictionnaire.
-2. **Création de l’hexastore** avec ses indexes.
-3. **Lecture des requêtes** (parser fourni).
-4. **Accès aux données et visualisation des résultats**.
-
----
----
-
 ## L’évaluation des requêtes
 
 Nous identifions quatre étapes fondamentales dans l’évaluation des requêtes en étoile :

@@ -10,11 +10,12 @@ Précisément, les performances de votre système doivent être comparées en ut
 
 ## Travail à rendre
 
-1. Analyse des bancs d'essai et plan des tests à réaliser : **5 décembre**.
-2. Réalisation des tests et document final : **15 décembre**.
+1. Analyse des bancs d'essai et plan des tests à réaliser. Pas de rendu dans Moodle, mais le plan de test sera discuté en TP le **6 décembre**.
+2. Réalisation des tests et document final : **15 décembre** (rendu dans Moodle).
 
 ---
-**Les réponses aux questions suivantes doivent être incluses dans le rapport final du projet, que vous pouvez organiser librement.**
+**Les réponses aux questions suivantes doivent être incluses dans le rapport final du projet, que vous pouvez organiser librement. La seule contrainte concerne la taille du rapport qui ne doit pas dépasser les 10 pages (annexes exclus).**
+
 
 ---
 
@@ -23,7 +24,7 @@ Précisément, les performances de votre système doivent être comparées en ut
 1. Quels **types** de benchmark avez-vous utilisés pour vos tests pendant le développement ?  
 2. Décrivez un test possible pour chaque **type** de benchmark (micro, standard, réel).
 3. Vous allez utiliser le benchmark [WatDiv](http://dsg.uwaterloo.ca/watdiv/) pour vos tests.  
-   Présentez brièvement le benchmark.
+   Présentez brièvement le benchmark, qu'est WatDiv ?
 
 ---
 

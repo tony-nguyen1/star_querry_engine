@@ -11,7 +11,7 @@ Précisément, les performances de votre système doivent être comparées en ut
 ## Travail à rendre
 
 1. Analyse des bancs d'essai et plan des tests à réaliser. Pas de rendu dans Moodle, mais le plan de test sera discuté en TP le **6 décembre**.
-2. Réalisation des tests et document final : **15 décembre** (rendu dans Moodle).
+2. Réalisation des tests et document final : **~15~22 décembre** (rendu dans Moodle).
 
 ---
 **Les réponses aux questions suivantes doivent être incluses dans le rapport final du projet, que vous pouvez organiser librement. La seule contrainte concerne la taille du rapport qui ne doit pas dépasser les 10 pages (annexes exclus).**

@@ -123,3 +123,4 @@ Modifiez puis exécutez le script `regenerate_queryset.sh` (par exemple, modifie
 . ./regenerate_queryset.sh
 ```
 
+En cas de problèmes non résolus avec WatDiv, vous pouvez utiliser des données et requêtes mises à disposition [au lien suivant](https://gitlab.etu.umontpellier.fr/p00000013857/watdiv-backup). Attention, il s'agit d'un dépôt de "dépannage" contenant données et requêtes "brutes" qui doivent être traitées avant de pouvoir être utilisées pour l'analyse des performances.

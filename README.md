@@ -10,24 +10,6 @@ https://gitlab.etu.umontpellier.fr/p00000415795/nosql-engine-skeleton/-/tree/mai
 
 Mohamad Satea ALMALLOUHI & Tony NGUYEN
 
-# Benchmarks
-
-## Les diférents type de benchmarks
-
-Nous avons utlisé des micro benchmarks et nous allons réalisé un benchmark standard
-
-micro -> tests unitaires
-
-standard -> watdiv on généère un dataset, un évalue les requêtes générer, on regarde
-
-réel -> on met en ligne un service qui utilise notre système et on requête les performances que les utilisateurs ont quand ils l'utilisent
-
-## WatDiv
-
-https://dsg.uwaterloo.ca/watdiv/
-
-WatDiv est un outil de benchmark. Il permet de créer un jeu de donnée à exécuter. Il peut non seulement générer la data mais aussi les requêtes. Il est paramétrable dans le sens où le requête crée sont varié selon notre besoin.
-
 ## Objectif
 L’objectif du TD est d’implémenter l’approche hexastore pour l’interrogation des données RDF vue en cours, ainsi que les procédures nécessaires à l’évaluation de requêtes en étoile (exprimées en syntaxe SPARQL) qui seront introduites par la suite.
 

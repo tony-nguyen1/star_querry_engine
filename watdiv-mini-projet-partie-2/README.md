@@ -30,7 +30,7 @@ Précisément, les performances de votre système doivent être comparées en ut
 
 ## Préparation des bancs d'essais
 
-Attention : 
+⚠️ Attention ⚠️  : 
 - Le fonctionnement de Watdiv n'est garanti que dans les ordinateurs de la faculté.
 - Utilisez la version de Watdiv preconfigurée qui est mise à disposition dans ce dépôt.
 

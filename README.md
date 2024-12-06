@@ -5,6 +5,14 @@
 - <federico.ulliana@inria.fr>
 - <guillaume.perution-kihli@inria.fr>
 
+#### Avant de commencer 
+
+Cloner le projet depuis le terminal.
+
+```
+git clone https://gitlab.etu.umontpellier.fr/p00000415795/nosql-engine-skeleton.git
+```
+
 ---
 
 ## Objectif

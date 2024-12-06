@@ -112,10 +112,15 @@ make clean
 make
 ```
 
-**Pour générer les données** (le facteur d’échelle 1 génère 15MB de données, 10 -> 150MB, 0.1 -> 1.5MB, etc.) :
+**Pour générer les données** (le facteur d’échelle 1 génère 15MB de données, 10 -> 150MB, etc.) :
 
 ```bash
 bin/Release/watdiv -d model/wsdbm-data-model.txt 1
+```
+
+Pour sauvegarder les données dans un fichier.
+```bash
+bin/Release/watdiv -d model/wsdbm-data-model.txt 1 > data.nt
 ```
 
 **Pour générer des requêtes** :

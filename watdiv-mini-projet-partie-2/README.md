@@ -45,14 +45,13 @@ Précisément, les performances de votre système doivent être comparées en ut
 
 2. Créer un jeu de tests pour :
    - Les requêtes **en étoile**.
-      - Les requêtes **générales**.
 
    ⚠️ La validité des expériences dépend de ce passage clé. Vous devrez générer plusieurs requêtes avec WatDiv.
 
 3. Une fois votre jeu de requêtes de test créé, représentez les résultats avec un histogramme montrant :
    - Le nombre de réponses aux requêtes sur une instance de **500K** et de **2M** triples.
 4. Combien de requêtes ont zéro réponses ?  
-5. Combien de requêtes générales sont en étoile ?
+5. Combien de requêtes sont en étoile ?
 
 ---
 
@@ -121,7 +120,7 @@ bin/Release/watdiv -d model/wsdbm-data-model.txt 1
 
 **Pour générer des requêtes** :
 
-Modifiez les patrons de requêtes dans le répertoire `testsuite/templates`.
+Ovrez les patrons de requêtes dans le répertoire `testsuite/templates` pour visualiser le fonctionnement du générateur de requêtes.
 Modifiez puis exécutez le script `regenerate_queryset.sh` (par exemple, modifiez le nombre de requêtes générées par patron, actuellement fixé à 100).
 
 ```bash

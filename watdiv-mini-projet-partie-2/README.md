@@ -30,6 +30,11 @@ Précisément, les performances de votre système doivent être comparées en ut
 
 ## Préparation des bancs d'essais
 
+Attention : 
+- Le fonctionnement de Watdiv n'est garanti que dans les ordinateurs de la faculté.
+- Utilisez la version de Watdiv preconfigurée qui est mise à disposition dans ce dépôt.
+
+
 1. Utiliser la version de WatDiv mise à disposition pour générer des bases de données de tailles différentes, ainsi que des jeux de requêtes pour vos tests.  
    - **Pour générer des données** : Compilez WatDiv (C++) selon les instructions ci-dessous ou sur le [site de WatDiv](https://dsg.uwaterloo.ca/watdiv/#installation). Vérifiez que la bibliothèque **BOOST** est installée.
    - **Format des données** : WatDiv génère des fichiers au format N3. Si nécessaire, utilisez [rdf2rdf](http://www.l3s.de/~minack/rdf2rdf/) pour les convertir en RDF/XML.

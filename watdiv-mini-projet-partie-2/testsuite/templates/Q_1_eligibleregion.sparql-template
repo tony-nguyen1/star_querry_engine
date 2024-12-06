@@ -3,3 +3,4 @@ SELECT ?v0 WHERE {
 	?v0	sorg:eligibleRegion	%v2% .
 
 }
+

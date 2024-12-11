@@ -44,6 +44,39 @@ https://dsg.uwaterloo.ca/watdiv/
 
 WatDiv est un outil de benchmark. Il permet de créer un jeu de donnée à exécuter. Il peut non seulement générer la data mais aussi les requêtes. Il est paramétrable dans le sens où le requête crée sont varié selon notre besoin.
 
+# Plan d'action
+
+## ~~Expé pour choisir la taille du warm up~~
+
++ make 1 set
++ warmup & shuffle
++ run the whole thing on this set
++ do this multiple time
++ vary the amount for the warmup to minimize variation
+
+Pour enlever le comportement bizare sur les écrans de la fac alt+zoomArrière~~
+
+## Generation of data/querries
+
++ 2 facteurs 2 niveaux, tailles des données et tailles des réponses des requêtes
++ make 4 set of data, 2 with a lot of data, 2 with a low amount of data; same ammount of querry
++ of the 2 sets a lot of data, make one with small sized answers, the other with huge answers
++ same with sets with low data
+
++2² : tailles des des données, ram : aloué à la jvm plus ou moins de ram 
+
+## Action
+1. Load data to a collection
+2. Shuffle the collection
+3. Split the collection into warm_set / real_set
+4. Evaluation workload from begining to end of the set
+
+### Combien de jar ?
+
++ Integraal
++ Mon système
++ Système enemie alias : 
+
 ## Préparation des bancs d'essais
 
 1. Utiliser la version de WatDiv mise à disposition pour générer des bases de données de tailles différentes, ainsi que des jeux de requêtes pour vos tests.  

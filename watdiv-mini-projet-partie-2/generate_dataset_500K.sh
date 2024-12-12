@@ -1,0 +1,1 @@
+bin/Release/watdiv -d model/wsdbm-data-model.txt 20 1 > testsuite/dataset/2M.rdf

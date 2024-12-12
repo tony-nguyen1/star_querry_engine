@@ -79,6 +79,11 @@ Pour enlever le comportement bizare sur les écrans de la fac alt+zoomArrière~~
 
 ## Préparation des bancs d'essais
 
+Attention   : 
+- ⚠️ Le fonctionnement de Watdiv n'est garanti que dans les ordinateurs de la faculté.
+- ⚠️ Utilisez la version de Watdiv preconfigurée qui est mise à disposition dans ce dépôt.
+
+
 1. Utiliser la version de WatDiv mise à disposition pour générer des bases de données de tailles différentes, ainsi que des jeux de requêtes pour vos tests.  
    - **Pour générer des données** : Compilez WatDiv (C++) selon les instructions ci-dessous ou sur le [site de WatDiv](https://dsg.uwaterloo.ca/watdiv/#installation). Vérifiez que la bibliothèque **BOOST** est installée.
    - **Format des données** : WatDiv génère des fichiers au format N3. Si nécessaire, utilisez [rdf2rdf](http://www.l3s.de/~minack/rdf2rdf/) pour les convertir en RDF/XML.
@@ -89,14 +94,13 @@ Pour enlever le comportement bizare sur les écrans de la fac alt+zoomArrière~~
 
 2. Créer un jeu de tests pour :
    - Les requêtes **en étoile**.
-      - Les requêtes **générales**.
 
    ⚠️ La validité des expériences dépend de ce passage clé. Vous devrez générer plusieurs requêtes avec WatDiv.
 
 3. Une fois votre jeu de requêtes de test créé, représentez les résultats avec un histogramme montrant :
    - Le nombre de réponses aux requêtes sur une instance de **500K** et de **2M** triples.
 4. Combien de requêtes ont zéro réponses ?  
-5. Combien de requêtes générales sont en étoile ?
+5. Combien de requêtes sont en étoile ?
 
 ---
 
@@ -157,18 +161,24 @@ make clean
 make
 ```
 
-**Pour générer les données** (le facteur d’échelle 1 génère 15MB de données, 10 -> 150MB, 0.1 -> 1.5MB, etc.) :
+**Pour générer les données** (le facteur d’échelle 1 génère 15MB de données, 10 -> 150MB, etc.) :
 
 ```bash
 bin/Release/watdiv -d model/wsdbm-data-model.txt 1
 ```
 
+Pour sauvegarder les données dans un fichier.
+```bash
+bin/Release/watdiv -d model/wsdbm-data-model.txt 1 > data.nt
+```
+
 **Pour générer des requêtes** :
 
-Modifiez les patrons de requêtes dans le répertoire `testsuite/templates`.
+Ovrez les patrons de requêtes dans le répertoire `testsuite/templates` pour visualiser le fonctionnement du générateur de requêtes.
 Modifiez puis exécutez le script `regenerate_queryset.sh` (par exemple, modifiez le nombre de requêtes générées par patron, actuellement fixé à 100).
 
 ```bash
 . ./regenerate_queryset.sh
 ```
 
+En cas de problèmes non résolus avec WatDiv, vous pouvez utiliser des données et requêtes mises à disposition [au lien suivant](https://gitlab.etu.umontpellier.fr/p00000013857/watdiv-backup). Attention, il s'agit d'un dépôt de "dépannage" contenant données et requêtes "brutes" qui doivent être traitées avant de pouvoir être utilisées pour l'analyse des performances.

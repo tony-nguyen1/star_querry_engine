@@ -64,11 +64,12 @@ public final class HistogrammeApplication {
 
 
 		HashMap<String, Integer> map = new HashMap<>();
-		//TODO
+		int nb = 0;
 
 		long start = System.nanoTime();
 		int i = 0;
 		StringBuilder sb = new StringBuilder();
+		StringBuilder sb_with_indice = new StringBuilder();
 		for (StarQuery starQuery : starQueries) {
 			sb.append(i);
 			sb.append(" ");
@@ -81,9 +82,12 @@ public final class HistogrammeApplication {
 			map.computeIfAbsent(""+nKey, s -> 0);
 			map.put(""+nKey, map.get(""+nKey)+1);
 			sb.append("\n");
+			if (subList.isEmpty()) {
+				nb++;
+			}
 			i++;
 		}
-//		System.out.println(sb);
+		System.out.println(sb);
 
 
 		long finish = System.nanoTime();
@@ -100,10 +104,12 @@ public final class HistogrammeApplication {
 //			executeStarQuery(starQuery, factBase);
 //		}
 
-//		System.out.println("//////");
+		System.out.println("//////");
+		System.out.println("histogramme");
 		for (String s : map.keySet()) {
 			System.out.println(s+" "+map.get(s));
 		}
+		System.out.println("\n\n"+nb+" requêtes sans réponses");
 	}
 
 	/**

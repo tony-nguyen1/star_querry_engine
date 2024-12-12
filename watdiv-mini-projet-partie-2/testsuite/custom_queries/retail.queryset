@@ -8,7 +8,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -19,7 +19,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -30,7 +30,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -41,7 +41,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -52,7 +52,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -63,7 +63,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -74,7 +74,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -85,7 +85,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -96,7 +96,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -107,7 +107,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -118,7 +118,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -129,7 +129,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -140,7 +140,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -151,7 +151,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -162,7 +162,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -173,7 +173,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -184,7 +184,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -195,7 +195,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -206,7 +206,7 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }
 
 SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
@@ -217,4 +217,4 @@ SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
 	?v0 <http://purl.org/goodrelations/validThrough> ?v6 .
 	?v0 <http://schema.org/eligibleQuantity> ?v7 .
 	?v0 <http://schema.org/eligibleRegion> ?v8 .
-	?v0 <http://schema.org/priceValidUntil> ?v9 .
+	?v0 <http://schema.org/priceValidUntil> ?v9 . }

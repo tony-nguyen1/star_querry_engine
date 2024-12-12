@@ -9,3 +9,5 @@ set terminal png
 set output "plot.png"
 replot
 set output
+
+TODO identifier les templates qui donnent pas beaucoup de réponses (0)

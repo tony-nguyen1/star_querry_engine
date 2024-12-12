@@ -207,3 +207,17 @@ Vous devez implémenter une procédure qui compare les résultats de votre syst�
 3. Les résultats doivent être exportés dans un répertoire dédié.
 
 ---
+
+### Commands
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid border -1
+set boxwidth 0.9
+set title "Histogramme des données"
+set xlabel "X-axis"
+set ylabel "Y-axis"
+plot "histo.dat" using 2:xtic(1) title "Values"
+set terminal png
+set output "histogramme.png"
+replot
+set output

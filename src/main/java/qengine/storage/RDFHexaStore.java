@@ -7,6 +7,7 @@ import fr.boreal.model.logicalElements.api.Variable;
 import fr.boreal.model.logicalElements.impl.SubstitutionImpl;
 import qengine.model.RDFAtom;
 import qengine.model.StarQuery;
+import qengine.program.Store;
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ import java.util.*;
  * Les index sont basés sur les combinaisons (Sujet, Prédicat, Objet), (Sujet, Objet, Prédicat),
  * (Prédicat, Sujet, Objet), (Prédicat, Objet, Sujet), (Objet, Sujet, Prédicat) et (Objet, Prédicat, Sujet).
  */
-public class RDFHexaStore implements RDFStorage {
+public class RDFHexaStore implements RDFStorage, Store {
     private int cpt;
     private long nbAtom;
 
@@ -356,7 +357,7 @@ public class RDFHexaStore implements RDFStorage {
     public Iterator<Substitution> match(StarQuery q) {
         Set<Substitution> result = new HashSet<>();
 
-        System.out.println(q);
+//        System.out.println(q);
 
         List<RDFAtom> atomList = new ArrayList<>(q.getRdfAtoms());
         atomList.sort(new Comparator<>() {
@@ -367,7 +368,7 @@ public class RDFHexaStore implements RDFStorage {
         });
         atomList = atomList.reversed();
 
-        System.out.println("liste atom triée : " + atomList);
+//        System.out.println("liste atom triée : " + atomList);
 
         Set<Substitution> listA = new HashSet<>();
         if (atomList.size() == 1) {
@@ -393,12 +394,12 @@ public class RDFHexaStore implements RDFStorage {
                 if (true)
 //                if (q.getAnswerVariables().size() != 1)
                 {
-                    System.out.println("... instanciation");
+//                    System.out.println("... instanciation");
 
                     // Si listA vide -> pas de sol ; condition de l'atom précédent non-sat
                     // -> short circuit the loop
                     if (listA.isEmpty()) {
-                        System.out.println("listA empty");
+//                        System.out.println("listA empty");
                         stop = true;
                     }
 
@@ -450,13 +451,13 @@ public class RDFHexaStore implements RDFStorage {
 //                        }
 //                    }
 
-                    System.out.println("listA=" + listA);
-                    System.out.println("atomInstancieList=" + atomInstancieList);
-                    System.out.println("listB=" + listB);
-                    System.out.println("A empty? "+ listA.isEmpty());
-                    System.out.println("B empty? "+ listB.isEmpty());
+//                    System.out.println("listA=" + listA);
+//                    System.out.println("atomInstancieList=" + atomInstancieList);
+//                    System.out.println("listB=" + listB);
+//                    System.out.println("A empty? "+ listA.isEmpty());
+//                    System.out.println("B empty? "+ listB.isEmpty());
                     Set<Substitution> setResultIntermediaire = produitCartesian(listA, listB, q.getAnswerVariables());
-                    System.out.println("->" + setResultIntermediaire);
+//                    System.out.println("->" + setResultIntermediaire);
 
                     listA = setResultIntermediaire;
                 }

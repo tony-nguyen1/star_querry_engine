@@ -14,32 +14,48 @@ import qengine.model.RDFAtom;
 import qengine.model.StarQuery;
 import qengine.parser.RDFAtomParser;
 import qengine.parser.StarQuerySparQLParser;
+import qengine.storage.RDFHexaStore;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.math.RoundingMode.HALF_EVEN;
+
 public final class MyImplementationApplication {
 
-	private static final String WORKING_DIR = "watdiv-mini-projet-partie-2/";
-	private static final String SAMPLE_DATA_FILE = WORKING_DIR + "100K.nt";
-	private static final String SAMPLE_QUERY_FILE = WORKING_DIR + "data2M/Q_1_eligibleregion.queryset";
+//	private static final String WORKING_DIR = "watdiv-mini-projet-partie-2/";
+//	private static final String SAMPLE_DATA_FILE = WORKING_DIR + "100K.nt";
+//	private static final String SAMPLE_QUERY_DIR = WORKING_DIR + "data2M/";
 
 	public static void main(String[] args) throws IOException {
+		if (args.length != 3) {
+			throw new IllegalArgumentException("usage : ./abc.jar path/to/data path/to/querry mode");
+		}
+//		for (String s : args) {
+//			System.out.println(s);
+//		}
+
+		String pathDataFile;
+		String pathQueryDir;
+		pathDataFile = args[0];
+		pathQueryDir = args[1];
+//		System.out.println("\n"+SAMPLE_DATA_FILE+"\n"+SAMPLE_QUERY_DIR);
+
+		int moteurInt;
+		moteurInt = Integer.parseInt(args[2]);
 		/*
 		 * Exemple d'utilisation des deux parsers
 		 */
-		System.out.println("=== Parsing RDF Data ===");
-		List<RDFAtom> rdfAtoms = parseRDFData(SAMPLE_DATA_FILE);
+//		System.out.println("=== Parsing RDF Data ===");
+		List<RDFAtom> rdfAtoms = parseRDFData(pathDataFile);
 
-		System.out.println("\n=== Parsing Sample Queries ===");
-		List<StarQuery> starQueries = parseDirQuerries(WORKING_DIR+"data2M/");//parseSparQLQueries(SAMPLE_QUERY_FILE);
+//		System.out.println("\n=== Parsing Sample Queries ===");
+		List<StarQuery> starQueries = parseDirQuerries(pathQueryDir);//parseSparQLQueries(SAMPLE_QUERY_FILE);
 
 
 //
@@ -47,14 +63,60 @@ public final class MyImplementationApplication {
 //		 * Exemple d'utilisation de l'évaluation de requetes par Integraal avec les objets parsés
 //		 */
 //		System.out.println("\n=== Executing the queries with Integraal ===");
-//		FactBase factBase = new SimpleInMemoryGraphStore();
-//		for (RDFAtom atom : rdfAtoms) {
-//			factBase.add(atom);  // Stocker chaque RDFAtom dans le store
-//		}
+		Store store = null;
+		switch (moteurInt) {
+			case 0:
+				store = new WrapperIntegraal(new SimpleInMemoryGraphStore());
+				break;
+			case 1:
+				store = new RDFHexaStore();
+		}
+
+		for (RDFAtom atom : rdfAtoms) {
+			store.add(atom); // Stocker chaque RDFAtom dans le store
+		}
+
+
+		HashMap<String, Integer> map = new HashMap<>();
+		//TODO
+
+		long start = System.nanoTime();
+		int i = 0;
+		StringBuilder sb = new StringBuilder();
+		for (StarQuery starQuery : starQueries) {
+			sb.append(i);
+			sb.append(" ");
+			Iterator<Substitution> iterator = store.match(starQuery);
+			ArrayList<Substitution> subList = new ArrayList<>();
+			iterator.forEachRemaining(subList::add);
+			sb.append(subList.size());
+			int nKey = subList.size()/10;
+			sb.append(" "+nKey);
+			map.computeIfAbsent(""+nKey, s -> 0);
+			map.put(""+nKey, map.get(""+nKey)+1);
+			sb.append("\n");
+			i++;
+		}
+		System.out.println(sb);
+
+
+		long finish = System.nanoTime();
+		System.currentTimeMillis();
+		long timeElapsed = finish - start;
+		double d = timeElapsed/1000000000d;
+//		System.out.println("t="+d);
+		DecimalFormat df = new DecimalFormat("#.###");
+		String arrondi = df.format(d);
+//		System.out.println(arrondi);
 //
 //		// Exécuter les requêtes sur le store
 //		for (StarQuery starQuery : starQueries) {
 //			executeStarQuery(starQuery, factBase);
+//		}
+
+//		System.out.println("//////");
+//		for (String s : map.keySet()) {
+//			System.out.println(s+" "+map.get(s));
 //		}
 	}
 
@@ -68,6 +130,23 @@ public final class MyImplementationApplication {
 		FileReader rdfFile = new FileReader(rdfFilePath);
 		List<RDFAtom> rdfAtoms = new ArrayList<>();
 
+
+
+		PrintStream originalOut = System.out;
+
+		// Création d'un ByteArrayOutputStream pour capturer les données
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream newOut = new PrintStream(baos);
+
+		// Redirige System.out vers notre PrintStream
+//		System.setOut(newOut);
+
+		// Code dont la sortie doit être capturée
+		System.out.println("Ceci est capturé dans le flux !");
+
+
+
+
 		try (RDFAtomParser rdfAtomParser = new RDFAtomParser(rdfFile, RDFFormat.NTRIPLES)) {
 			int count = 0;
 			while (rdfAtomParser.hasNext()) {
@@ -77,6 +156,14 @@ public final class MyImplementationApplication {
 			}
 			System.out.println("Total RDF Atoms parsed: " + count);
 		}
+
+
+		// Restauration de la sortie standard
+//		System.setOut(originalOut);
+
+		// Affichage du contenu capturé
+//		baos.reset();
+//		System.out.println("Sortie capturée : " + baos.toString());
 		return rdfAtoms;
 	}
 
@@ -96,15 +183,15 @@ public final class MyImplementationApplication {
 				Query query = queryParser.next();
 				if (query instanceof StarQuery starQuery) {
 					starQueries.add(starQuery);  // Stocker la requête dans la collection
-					System.out.println("Star Query #" + (++queryCount) + ":");
-					System.out.println("  Central Variable: " + starQuery.getCentralVariable().label());
-					System.out.println("  RDF Atoms:");
-					starQuery.getRdfAtoms().forEach(atom -> System.out.println("    " + atom));
+//					System.out.println("Star Query #" + (++queryCount) + ":");
+//					System.out.println("  Central Variable: " + starQuery.getCentralVariable().label());
+//					System.out.println("  RDF Atoms:");
+//					starQuery.getRdfAtoms().forEach(atom -> System.out.println("    " + atom));
 				} else {
-					System.err.println("Requête inconnue ignorée.");
+//					System.err.println("Requête inconnue ignorée.");
 				}
 			}
-			System.out.println("Total Queries parsed: " + starQueries.size());
+//			System.out.println("Total Queries parsed: " + starQueries.size());
 		}
 		return starQueries;
 	}
@@ -117,13 +204,13 @@ public final class MyImplementationApplication {
 				.map(file -> querryDirPath+file.getName())
 				.collect(Collectors.toSet());
 
-		System.out.println(fileNameSet);
+//		System.out.println(fileNameSet);
 		for (String path : fileNameSet) {
 			try {
 				starQueries.addAll(parseSparQLQueries(path));
 
 			} catch (Exception e) {
-				System.err.println("path="+path);
+//				System.err.println("path="+path);
 				throw new RuntimeException(e);
 			}
 		}
@@ -132,28 +219,5 @@ public final class MyImplementationApplication {
 		System.out.println("Total Queries parsed: " + starQueries.size());
 
 		return starQueries;
-	}
-
-	/**
-	 * Exécute une requête en étoile sur le store et affiche les résultats.
-	 *
-	 * @param starQuery La requête à exécuter
-	 * @param factBase  Le store contenant les atomes
-	 */
-	private static void executeStarQuery(StarQuery starQuery, FactBase factBase) {
-		FOQuery<FOFormulaConjunction> foQuery = starQuery.asFOQuery(); // Conversion en FOQuery
-		FOQueryEvaluator<FOFormula> evaluator = GenericFOQueryEvaluator.defaultInstance(); // Créer un évaluateur
-		Iterator<Substitution> queryResults = evaluator.evaluate(foQuery, factBase); // Évaluer la requête
-
-		System.out.printf("Execution of  %s:%n", starQuery);
-		System.out.println("Answers:");
-		if (!queryResults.hasNext()) {
-			System.out.println("No answer.");
-		}
-		while (queryResults.hasNext()) {
-			Substitution result = queryResults.next();
-			System.out.println(result); // Afficher chaque réponse
-		}
-		System.out.println();
 	}
 }

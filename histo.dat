@@ -1,13 +1,27 @@
-Exception in thread "main" java.lang.RuntimeException: java.lang.RuntimeException: Erreur lors de l'analyse de la requête SparQL
-	at qengine.program.HistogrammeApplication.parseDirQuerries(HistogrammeApplication.java:206)
-	at qengine.program.HistogrammeApplication.main(HistogrammeApplication.java:44)
-Caused by: java.lang.RuntimeException: Erreur lors de l'analyse de la requête SparQL
-	at qengine.parser.StarQuerySparQLParser.hasNext(StarQuerySparQLParser.java:74)
-	at qengine.program.HistogrammeApplication.parseSparQLQueries(HistogrammeApplication.java:174)
-	at qengine.program.HistogrammeApplication.parseDirQuerries(HistogrammeApplication.java:202)
-	... 1 more
-Caused by: java.lang.IllegalArgumentException: Plusieurs variables centrales détectées, ce n'est pas une requête en étoile.
-	at qengine.parser.StarQuerySparQLParser.updateCentralVariable(StarQuerySparQLParser.java:149)
-	at qengine.parser.StarQuerySparQLParser.parseStarQuery(StarQuerySparQLParser.java:117)
-	at qengine.parser.StarQuerySparQLParser.hasNext(StarQuerySparQLParser.java:69)
-	... 3 more
+0 2 0
+1 2 0
+2 1 0
+3 2 0
+4 1 0
+5 5 0
+6 2 0
+7 1 0
+8 2 0
+9 1 0
+10 2 0
+11 2 0
+12 1 0
+13 1 0
+14 2 0
+15 5 0
+16 5 0
+17 3 0
+18 2 0
+19 4 0
+
+//////
+histogramme
+0 20
+
+
+0 requêtes sans réponses

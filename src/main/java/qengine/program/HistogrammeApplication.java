@@ -64,6 +64,7 @@ public final class HistogrammeApplication {
 
 
 		HashMap<String, Integer> map = new HashMap<>();
+		HashMap<Integer, List<StarQuery>> goodMap = new HashMap<>();
 		int nb = 0;
 
 		long start = System.nanoTime();
@@ -85,9 +86,13 @@ public final class HistogrammeApplication {
 			if (subList.isEmpty()) {
 				nb++;
 			}
+
+			goodMap.computeIfAbsent(subList.size(), k -> new ArrayList<>());
+			goodMap.get(subList.size()).add(starQuery);
+
 			i++;
 		}
-		System.out.println(sb);
+//		System.out.println(sb);
 
 
 		long finish = System.nanoTime();
@@ -104,12 +109,43 @@ public final class HistogrammeApplication {
 //			executeStarQuery(starQuery, factBase);
 //		}
 
-		System.out.println("//////");
-		System.out.println("histogramme");
+//		System.out.println("//////");
+//		System.out.println("histogramme");
 		for (String s : map.keySet()) {
-			System.out.println(s+" "+map.get(s));
+//			System.out.println(s+" "+map.get(s));
 		}
 		System.out.println("\n\n"+nb+" requêtes sans réponses");
+
+//		System.out.println("#Reponse #Requete");
+		for (Integer nbReponse : goodMap.keySet()) {
+//			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
+		}
+
+		HashMap<Integer, List<StarQuery>> readyToMatchMap = new HashMap<>();
+		int nbMaxQuerryPerClass = 3;
+		for (Integer nbReponse : goodMap.keySet()) {
+
+			readyToMatchMap.computeIfAbsent(nbReponse, k -> new ArrayList<>());
+			List<StarQuery> oof = goodMap.get(nbReponse);
+			for (int foo = 0; foo <nbMaxQuerryPerClass; foo++) {
+
+				if (foo < oof.size()) {
+					readyToMatchMap.get(nbReponse).add(oof.get(foo));
+				}
+//				System.out.println(oof.get(foo));
+//				System.out.println(oof.size());
+			}
+//			goodMap.get(nbReponse);
+
+
+
+//			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
+		}
+
+		System.out.println("#Reponse #Requete");
+		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
+			System.out.println(nbReponse+" "+readyToMatchMap.get(nbReponse).size());
+		}
 	}
 
 	/**

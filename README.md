@@ -250,8 +250,24 @@ set boxwidth 0.9
 set title "Histogramme du nombre de requetes par class (500K triplets)"
 set xlabel "X-axis"
 set ylabel "Y-axis"
-plot "total_before_filter.dat" using 2:xtic(1) title "Values"
+plot "answers_500K_80q.dat" using 2:xtic(1) title "Values"
 set terminal png
 set output "nbReponsesParClassHisto500K.png"
 replot
 set output
+534585 triplets
+
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid border -1
+set boxwidth 0.9
+set title "Histogramme du nombre de requetes par class (2M triplets)"
+set xlabel "X-axis"
+set ylabel "Y-axis"
+plot "answers_2M_80q.dat" using 2:xtic(1) title "Values"
+set terminal png
+set output "nbReponsesParClassHisto2M.png"
+replot
+set output
+2156468

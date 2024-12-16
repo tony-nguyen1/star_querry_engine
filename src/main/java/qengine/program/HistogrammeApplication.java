@@ -93,6 +93,7 @@ public final class HistogrammeApplication {
 			i++;
 		}
 //		System.out.println(sb);
+		goodMap.remove(0);
 
 
 		long finish = System.nanoTime();
@@ -103,64 +104,16 @@ public final class HistogrammeApplication {
 		DecimalFormat df = new DecimalFormat("#.###");
 		String arrondi = df.format(d);
 		System.out.println(arrondi);
-//
-//		// Exécuter les requêtes sur le store
-//		for (StarQuery starQuery : starQueries) {
-//			executeStarQuery(starQuery, factBase);
-//		}
 
-//		System.out.println("//////");
-//		System.out.println("histogramme");
-		for (String s : map.keySet()) {
-//			System.out.println(s+" "+map.get(s));
-		}
 		System.out.println("\n\n"+nb+" requêtes sans réponses");
 
-//		System.out.println("#Reponse #Requete");
-		for (Integer nbReponse : goodMap.keySet()) {
-//			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
-		}
-
-		HashMap<Integer, List<StarQuery>> readyToMatchMap = new HashMap<>();
-		int nbMaxQuerryPerClass = 3;
-		System.out.println("#Reponse #Requete");
-		for (Integer nbReponse : goodMap.keySet().stream().sorted().toList()) {
-
-			readyToMatchMap.computeIfAbsent(nbReponse, k -> new ArrayList<>());
-			List<StarQuery> oof = goodMap.get(nbReponse);
-			for (int foo = 0; foo <nbMaxQuerryPerClass; foo++) {
-
-				if (foo < oof.size()) {
-					readyToMatchMap.get(nbReponse).add(oof.get(foo));
-				}
-//				System.out.println(oof.get(foo));
-//				System.out.println(oof.size());
-			}
-//			goodMap.get(nbReponse);
-
-
-
-			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
-		}
-		System.out.println(goodMap.keySet().stream().map(x -> goodMap.get(x).size()).mapToInt(Integer::intValue).sum()+" querries total");
-//		int[] tabInt = {1,6,11,16,20,30,40,50,60,70};
-
-
-//		System.out.println("Experience de flitrage");
 		HashMap<Integer, List<StarQuery>> readyToMatchMapBonneClass = new HashMap<>();
-		int nbParClasses = 15;
-		int tailleClass = 5;
-		List<Query> listQueryParClass = new ArrayList<>();
+		int nbParClasses = 30;
+//		int tailleClass = 5;
 		for (Integer nbReponse : goodMap.keySet().stream().sorted().filter(x -> !x.equals(0)).toList()) {
-//			System.out.println();
 			int res = nbReponse/10;
-//			System.out.println(nbReponse+"                  "+res);
 			readyToMatchMapBonneClass.computeIfAbsent(res, k -> new ArrayList<>());
 			readyToMatchMapBonneClass.get(res).addAll(goodMap.get(nbReponse));
-//			while (j < tabInt.length) {
-//
-//				j++;
-//			}
 
 		}
 		for (Integer nbReponse : readyToMatchMapBonneClass.keySet().stream().sorted().toList()) {
@@ -172,18 +125,9 @@ public final class HistogrammeApplication {
 			readyToMatchMapBonneClass.put(nbReponse, list);
 		}
 
-		System.out.println("#Reponse #Requete 3requetes par #Reponse");
-		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
-			System.out.println(nbReponse+" "+readyToMatchMap.get(nbReponse).size());
-		}
-		System.out.println(readyToMatchMap.keySet().stream().map(x -> readyToMatchMap.get(x).size()).mapToInt(Integer::intValue).sum()+" querries after filter");
-//		System.out.println("print des requêtes");
-//		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
-//			for (StarQuery starQuery : readyToMatchMap.get(nbReponse)) {
-//				System.out.println(starQuery.getLabel());
-//			}
-//		}
-		System.out.println("class #Requete 15 par classe");
+		//System.out.println(readyToMatchMap.keySet().stream().map(x -> readyToMatchMap.get(x).size()).mapToInt(Integer::intValue).sum()+" querries after filter");
+
+		System.out.println("class #Requete "+nbParClasses+" par classe");
 		List<StarQuery> allQueryFiltered = new ArrayList<>();
 		for (Integer nbReponse : readyToMatchMapBonneClass.keySet().stream().sorted().toList()) {
 			allQueryFiltered.addAll(readyToMatchMapBonneClass.get(nbReponse));
@@ -209,17 +153,17 @@ public final class HistogrammeApplication {
 
 
 
-		PrintStream originalOut = System.out;
+//		PrintStream originalOut = System.out;
 
 		// Création d'un ByteArrayOutputStream pour capturer les données
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		PrintStream newOut = new PrintStream(baos);
+//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//		PrintStream newOut = new PrintStream(baos);
 
 		// Redirige System.out vers notre PrintStream
-		System.setOut(newOut);
+//		System.setOut(newOut);
 
 		// Code dont la sortie doit être capturée
-		System.out.println("Ceci est capturé dans le flux !");
+//		System.out.println("Ceci est capturé dans le flux !");
 
 
 
@@ -236,10 +180,10 @@ public final class HistogrammeApplication {
 
 
 		// Restauration de la sortie standard
-		System.setOut(originalOut);
+//		System.setOut(originalOut);
 
 		// Affichage du contenu capturé
-		baos.reset();
+//		baos.reset();
 //		System.out.println("Sortie capturée : " + baos.toString());
 		return rdfAtoms;
 	}

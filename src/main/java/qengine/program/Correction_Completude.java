@@ -23,9 +23,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Correction_Completude {
 
-    private static final String WORKING_DIR = "data/";
-    private static final String SAMPLE_DATA_FILE = WORKING_DIR + "100K.nt";
-    private static final String SAMPLE_QUERY_FILE = WORKING_DIR + "STAR_ALL_workload.queryset";
+    private static final String WORKING_DIR = "watdiv-mini-projet-partie-2/";
+    private static final String SAMPLE_DATA_FILE = WORKING_DIR + "testsuite/dataset/500K.rdf";
+    private static final String SAMPLE_QUERY_FILE = WORKING_DIR + "testsuite/queryset_challenger/myQuerySet.queryset";
 
     public static void main(String[] args) throws IOException {
         /*
@@ -56,11 +56,11 @@ public class Correction_Completude {
 //            executeStarQuery(starQuery, factBase);
             //System.out.println(collectSubstitutions(rdfHexaStore.match(starQuery)));
 
-//            if (!sameResults(starQuery, factBase, rdfHexaStore)){
+            if (!sameResults(starQuery, factBase, rdfHexaStore)){
 ////                System.out.println(starQuery);
-//                memeResultats = false;
+                memeResultats = false;
 //                System.out.println("Les résultats de l'hexaStore sont différents ");
-//            }
+            }
             //else{System.out.println("Les résultats sont identiques");}
         }
         long finish = System.nanoTime();
@@ -161,13 +161,17 @@ public class Correction_Completude {
         rdfHexaStore.match(starQuery).forEachRemaining(queryResultsHexaStore::add);
 
         System.out.println(starQuery);
-        if (queryResultsFactBase.equals(queryResultsHexaStore))
-            System.out.println("Oracle = monRDFHexaStore");
+        if (queryResultsFactBase.equals(queryResultsHexaStore)) {
+            System.out.println("Oracle = monRDFHexaStore " + queryResultsFactBase.size());
+            System.out.println(queryResultsFactBase);
+        }
         else {
             if (queryResultsFactBase.containsAll(queryResultsHexaStore))
                 System.out.println("Oracle > monRDFHexaStore, il me manque des réponses");
             if (queryResultsHexaStore.containsAll(queryResultsFactBase))
                 System.out.println("Oracle < monRDFHexaStore, il a trop de réponses");
+            System.out.println(queryResultsFactBase.size()+" < "+queryResultsHexaStore.size());
+            System.out.println(queryResultsFactBase);
         }
         System.out.println("----");
         return queryResultsFactBase.equals(queryResultsHexaStore);

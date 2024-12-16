@@ -85,6 +85,7 @@ public final class MyImplementationApplication {
 		HashMap<Integer, List<StarQuery>> goodMap = new HashMap<>();
 		long start = System.nanoTime();
 		int i = 0;
+		int nbReponsesVides = 0;
 		StringBuilder sb = new StringBuilder();
 		for (StarQuery starQuery : starQueries) {
 			sb.append(i);
@@ -92,6 +93,9 @@ public final class MyImplementationApplication {
 			Iterator<Substitution> iterator = store.match(starQuery);
 			ArrayList<Substitution> subList = new ArrayList<>();
 			iterator.forEachRemaining(subList::add);
+			if (subList.isEmpty()) {
+				nbReponsesVides++;
+			}
 			sb.append(subList.size());
 			int nKey = subList.size()/10;
 			sb.append(" "+nKey);
@@ -109,6 +113,7 @@ public final class MyImplementationApplication {
 //		System.out.println(sb);
 
 
+
 		long finish = System.nanoTime();
 		System.currentTimeMillis();
 		long timeElapsed = finish - start;
@@ -121,6 +126,7 @@ public final class MyImplementationApplication {
 		for (Integer nbReponse : goodMap.keySet().stream().sorted().toList()) {
 			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
 		}
+		System.out.println(nbReponsesVides+" réponses vides");
 	}
 
 	/**

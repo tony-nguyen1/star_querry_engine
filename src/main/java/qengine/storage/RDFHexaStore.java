@@ -355,11 +355,8 @@ public class RDFHexaStore implements RDFStorage, Store {
 
     @Override
     public Iterator<Substitution> match(StarQuery q) {
-        Set<Substitution> result = new HashSet<>();
 
-//        System.out.println(q);
-
-        List<RDFAtom> atomList = new ArrayList<>(q.getRdfAtoms());
+        List<RDFAtom> atomList = q.getRdfAtoms();
         atomList.sort(new Comparator<>() {
             @Override
             public int compare(RDFAtom o1, RDFAtom o2) {
@@ -367,8 +364,7 @@ public class RDFHexaStore implements RDFStorage, Store {
             }
         });
         atomList = atomList.reversed();
-
-//        System.out.println("liste atom triée : " + atomList);
+//        System.out.println("liste atom triée: "+atomList);
 
         Set<Substitution> listA = new HashSet<>();
         if (atomList.size() == 1) {
@@ -379,50 +375,47 @@ public class RDFHexaStore implements RDFStorage, Store {
             Iterator<Substitution> iterator = this.match(atom);
 
             // transforme réponse en liste (utilisation + facile)
-            listA = new HashSet<>(); iterator.forEachRemaining(listA::add);
 
             boolean stop = false;
+            listA = new HashSet<>(); iterator.forEachRemaining(listA::add);
             if (listA.isEmpty()) {
                 stop = true;
             }
 
-            boolean opti = true;
+//            System.out.println("listA="+listA);
+
             int i = 1;
             while (!stop && i < atomList.size()) {
                 atom = atomList.get(i);
 
                 if (true)
-//                if (q.getAnswerVariables().size() != 1)
                 {
-//                    System.out.println("... instanciation");
-
                     // Si listA vide -> pas de sol ; condition de l'atom précédent non-sat
                     // -> short circuit the loop
                     if (listA.isEmpty()) {
-//                        System.out.println("listA empty");
                         stop = true;
                     }
-
-
-
+//                    System.out.println("listA="+listA);
 
                     // Création de nouveau atoms instancié
                     // les variables sont remplacées par ses substitutions possibles
                     // afin de réduire au maximum l'arbre de recherche
                     Set<Substitution> listB = new HashSet<>();
                     Set<Substitution> toRemove = new HashSet<>();
-                    Set<RDFAtom> atomInstancieList = new HashSet<>();
                     for (Substitution sub : listA) {
+//                        System.out.println("sub="+sub);
                         RDFAtom a;
                         a = this.instancie(atom, sub);
-//                        atomInstancieList.add(this.instancie(atom, sub));
 
-                        Set<Substitution> foo = new HashSet<>();
                         Iterator<Substitution> iteratorIntermediary = this.match(a);
+                        Set<Substitution> foo = new HashSet<>();
                         iteratorIntermediary.forEachRemaining(foo::add);
 
 
+//                        System.out.println("sub="+sub);
+//                        System.out.println("foo="+foo);
                         if (foo.isEmpty()) {
+//                            System.out.println();
 //                            System.out.println("non sat "+foo);
                             // disqualification of the partial substitution used to instanciate a
                             // with sub used for a
@@ -431,35 +424,35 @@ public class RDFHexaStore implements RDFStorage, Store {
                             toRemove.add(sub);
                         }
                         else {
-//                            System.out.println("sat "+a);
-                            listB.addAll(foo);
+//                            listB.addAll(foo);
+                            // combien sub and each sub of foo and add it to listB
+                            for (Substitution subB : foo) {
+                                Substitution substitution = new SubstitutionImpl();
+
+                                for (Variable v : subB.toMap().keySet()) {
+                                    substitution.toMap().put(v, subB.toMap().get(v));
+                                }
+                                for (Variable v : sub.toMap().keySet()) {
+                                    substitution.toMap().put(v, sub.toMap().get(v));
+                                }
+//                                System.out.println(sub);
+//                                System.out.println("rep="+substitution);
+                                listB.add(substitution);
+                            }
                         }
                     }
-                    listA.removeAll(toRemove);
 
-//                    for (RDFAtom a : atomInstancieList) {
-//                        Set<Substitution> foo = new HashSet<>();
-//                        Iterator<Substitution> iteratorIntermediary = this.match(a);
-//                        iteratorIntermediary.forEachRemaining(foo::add);
-//                        if (foo.isEmpty()) {
-//                            System.out.println("non sat "+a);
-//                            // do nothing
-//                        }
-//                        else {
-//                            System.out.println("sat "+a);
-//                            listB.addAll(foo);
-//                        }
-//                    }
+//                    System.out.println("listA="+listA);
+//                    listA.removeAll(toRemove);
+//                    System.out.println("after removal listA="+listA);
+//                    System.out.println("listB="+listB+" "+listB.size());
 
-//                    System.out.println("listA=" + listA);
-//                    System.out.println("atomInstancieList=" + atomInstancieList);
-//                    System.out.println("listB=" + listB);
-//                    System.out.println("A empty? "+ listA.isEmpty());
-//                    System.out.println("B empty? "+ listB.isEmpty());
-                    Set<Substitution> setResultIntermediaire = produitCartesian(listA, listB, q.getAnswerVariables());
-//                    System.out.println("->" + setResultIntermediaire);
+//                    System.out.println("afterRemovalListA="+listA);
+//                    Set<Substitution> setResultIntermediaire = produitCartesian(listA, listB, q.getAnswerVariables());
 
-                    listA = setResultIntermediaire;
+//                    System.out.println(setResultIntermediaire.size());
+
+                    listA = listB;
                 }
 
                 i++;
@@ -597,9 +590,13 @@ public class RDFHexaStore implements RDFStorage, Store {
                     Integer i = getFromIndexCptXX(this.indexCptPO, iPredicate, iObject);
                     nb = i == null ? 0 : i;
                 } else if (atom.getTriplePredicate().isVariable()) {
-                    nb = this.indexCptSO.get(iSubject).get(iObject);
-                } else { // atom.getTripleObject().isVariable()
-                    nb = this.indexCptSP.get(iSubject).get(iPredicate);
+                    Integer i = getFromIndexCptXX(this.indexCptSO, iSubject, iObject);
+                    nb = i == null ? 0 : i;
+                } else if(atom.getTripleObject().isVariable()) {
+                    Integer i = getFromIndexCptXX(this.indexCptSP, iSubject, iPredicate);
+                    nb = i == null ? 0 : i;
+                } else {
+                    throw new RuntimeException();
                 }
                 break;
             case 2:

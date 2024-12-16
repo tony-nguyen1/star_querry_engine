@@ -1,46 +1,24 @@
 Ceci est capturé dans le flux !
-18:11:08,815 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
-18:11:08,815 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
-18:11:08,815 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/home/tony/M2/noSQL/Code/nosql-engine-skeleton/target/classes/logback.xml]
-18:11:08,816 |-WARN in ch.qos.logback.classic.LoggerContext[default] - Resource [logback.xml] occurs multiple times on the classpath.
-18:11:08,816 |-WARN in ch.qos.logback.classic.LoggerContext[default] - Resource [logback.xml] occurs at [file:/home/tony/M2/noSQL/Code/nosql-engine-skeleton/target/classes/logback.xml]
-18:11:08,816 |-WARN in ch.qos.logback.classic.LoggerContext[default] - Resource [logback.xml] occurs at [jar:file:/home/tony/.m2/repository/fr/lirmm/graphik/view-parser/1.0.0/view-parser-1.0.0.jar!/logback.xml]
-18:11:08,860 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
-18:11:08,861 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
-18:11:08,861 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@3b598192 - Registering current configuration as safe fallback point
+23:21:23,617 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+23:21:23,617 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+23:21:23,617 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/home/tony/M2/noSQL/Code/nosql-engine-skeleton/target/classes/logback.xml]
+23:21:23,618 |-WARN in ch.qos.logback.classic.LoggerContext[default] - Resource [logback.xml] occurs multiple times on the classpath.
+23:21:23,618 |-WARN in ch.qos.logback.classic.LoggerContext[default] - Resource [logback.xml] occurs at [file:/home/tony/M2/noSQL/Code/nosql-engine-skeleton/target/classes/logback.xml]
+23:21:23,618 |-WARN in ch.qos.logback.classic.LoggerContext[default] - Resource [logback.xml] occurs at [jar:file:/home/tony/.m2/repository/fr/lirmm/graphik/view-parser/1.0.0/view-parser-1.0.0.jar!/logback.xml]
+23:21:23,677 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+23:21:23,678 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+23:21:23,679 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@213eef - Registering current configuration as safe fallback point
 
 Total RDF Atoms parsed: 2156468
-Total Queries parsed: 1200
-qengine.storage.RDFHexaStore@57baeedf
-t=2,691
+Total Queries parsed: 218
+qengine.program.WrapperIntegraal@5cb9f472
+t=24,955
 class #Requete
-0 802
-1 97
-2 100
-3 57
-4 30
-5 11
-6 34
+0 42
+1 59
+2 20
+3 61
+4 17
+5 12
 7 7
-8 6
-9 1
-10 3
-11 4
-12 3
-13 9
-14 1
-15 1
-17 3
-18 1
-19 5
-22 1
-24 3
-28 4
-30 1
-32 1
-35 1
-42 5
-51 4
-64 2
-101 1
-313 2
+15 réponses vides

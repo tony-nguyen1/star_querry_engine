@@ -71,6 +71,7 @@ public final class MyImplementationApplication {
 			case 1:
 				store = new RDFHexaStore();
 		}
+		System.out.println(store);
 
 		for (RDFAtom atom : rdfAtoms) {
 			store.add(atom); // Stocker chaque RDFAtom dans le store
@@ -96,28 +97,18 @@ public final class MyImplementationApplication {
 			map.put(""+nKey, map.get(""+nKey)+1);
 			sb.append("\n");
 			i++;
+			System.out.println(starQuery.getLabel());
 		}
-		System.out.println(sb);
+//		System.out.println(sb);
 
 
 		long finish = System.nanoTime();
 		System.currentTimeMillis();
 		long timeElapsed = finish - start;
 		double d = timeElapsed/1000000000d;
-//		System.out.println("t="+d);
 		DecimalFormat df = new DecimalFormat("#.###");
 		String arrondi = df.format(d);
-//		System.out.println(arrondi);
-//
-//		// Exécuter les requêtes sur le store
-//		for (StarQuery starQuery : starQueries) {
-//			executeStarQuery(starQuery, factBase);
-//		}
-
-//		System.out.println("//////");
-//		for (String s : map.keySet()) {
-//			System.out.println(s+" "+map.get(s));
-//		}
+		System.out.println("t="+arrondi);
 	}
 
 	/**
@@ -152,7 +143,8 @@ public final class MyImplementationApplication {
 			while (rdfAtomParser.hasNext()) {
 				RDFAtom atom = rdfAtomParser.next();
 				rdfAtoms.add(atom);  // Stocker l'atome dans la collection
-				System.out.println("RDF Atom #" + (++count) + ": " + atom);
+				++count;
+//				System.out.println("RDF Atom #" + (count) + ": " + atom);
 			}
 			System.out.println("Total RDF Atoms parsed: " + count);
 		}

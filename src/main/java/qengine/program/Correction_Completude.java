@@ -56,11 +56,11 @@ public class Correction_Completude {
 //            executeStarQuery(starQuery, factBase);
             //System.out.println(collectSubstitutions(rdfHexaStore.match(starQuery)));
 
-            if (!sameResults(starQuery, factBase, rdfHexaStore)){
-//                System.out.println(starQuery);
-                memeResultats = false;
-                System.out.println("Les résultats de l'hexaStore sont différents ");
-            }
+//            if (!sameResults(starQuery, factBase, rdfHexaStore)){
+////                System.out.println(starQuery);
+//                memeResultats = false;
+//                System.out.println("Les résultats de l'hexaStore sont différents ");
+//            }
             //else{System.out.println("Les résultats sont identiques");}
         }
         long finish = System.nanoTime();

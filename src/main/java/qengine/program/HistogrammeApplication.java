@@ -102,7 +102,7 @@ public final class HistogrammeApplication {
 //		System.out.println("t="+d);
 		DecimalFormat df = new DecimalFormat("#.###");
 		String arrondi = df.format(d);
-//		System.out.println(arrondi);
+		System.out.println(arrondi);
 //
 //		// Exécuter les requêtes sur le store
 //		for (StarQuery starQuery : starQueries) {
@@ -123,7 +123,8 @@ public final class HistogrammeApplication {
 
 		HashMap<Integer, List<StarQuery>> readyToMatchMap = new HashMap<>();
 		int nbMaxQuerryPerClass = 3;
-		for (Integer nbReponse : goodMap.keySet()) {
+		System.out.println("#Reponse #Requete");
+		for (Integer nbReponse : goodMap.keySet().stream().sorted().toList()) {
 
 			readyToMatchMap.computeIfAbsent(nbReponse, k -> new ArrayList<>());
 			List<StarQuery> oof = goodMap.get(nbReponse);
@@ -139,13 +140,21 @@ public final class HistogrammeApplication {
 
 
 
-//			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
+			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
 		}
+		System.out.println(goodMap.keySet().stream().map(x -> goodMap.get(x).size()).mapToInt(Integer::intValue).sum()+" querries total");
 
 		System.out.println("#Reponse #Requete");
 		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
 			System.out.println(nbReponse+" "+readyToMatchMap.get(nbReponse).size());
 		}
+		System.out.println(readyToMatchMap.keySet().stream().map(x -> readyToMatchMap.get(x).size()).mapToInt(Integer::intValue).sum()+" querries after filter");
+		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
+			for (StarQuery starQuery : readyToMatchMap.get(nbReponse)) {
+				System.out.println(starQuery.getLabel());
+			}
+		}
+
 	}
 
 	/**

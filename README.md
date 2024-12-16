@@ -229,3 +229,29 @@ set terminal png
 set output "histogramme.png"
 replot
 set output
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid border -1
+set boxwidth 0.9
+set title "Histogramme des données"
+set xlabel "X-axis"
+set ylabel "Y-axis"
+plot "total_before_filter.dat" using 2:xtic(1) title "Values"
+set terminal png
+set output "total_before_filter.png"
+replot
+set output
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid border -1
+set boxwidth 0.9
+set title "Histogramme du nombre de requetes par class (500K triplets)"
+set xlabel "X-axis"
+set ylabel "Y-axis"
+plot "total_before_filter.dat" using 2:xtic(1) title "Values"
+set terminal png
+set output "nbReponsesParClassHisto500K.png"
+replot
+set output

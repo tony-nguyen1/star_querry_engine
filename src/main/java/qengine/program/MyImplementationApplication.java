@@ -81,6 +81,8 @@ public final class MyImplementationApplication {
 		HashMap<String, Integer> map = new HashMap<>();
 		//TODO
 
+
+		HashMap<Integer, List<StarQuery>> goodMap = new HashMap<>();
 		long start = System.nanoTime();
 		int i = 0;
 		StringBuilder sb = new StringBuilder();
@@ -97,7 +99,12 @@ public final class MyImplementationApplication {
 			map.put(""+nKey, map.get(""+nKey)+1);
 			sb.append("\n");
 			i++;
-			System.out.println(starQuery.getLabel());
+//			System.out.println(starQuery.getLabel());
+
+			int res = subList.size()/10;
+//			System.out.println(nbReponse+"                  "+res);
+			goodMap.computeIfAbsent(res, k -> new ArrayList<>());
+			goodMap.get(res).add(starQuery);
 		}
 //		System.out.println(sb);
 
@@ -109,6 +116,11 @@ public final class MyImplementationApplication {
 		DecimalFormat df = new DecimalFormat("#.###");
 		String arrondi = df.format(d);
 		System.out.println("t="+arrondi);
+
+		System.out.println("class #Requete");
+		for (Integer nbReponse : goodMap.keySet().stream().sorted().toList()) {
+			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
+		}
 	}
 
 	/**

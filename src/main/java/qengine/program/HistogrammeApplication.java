@@ -143,17 +143,57 @@ public final class HistogrammeApplication {
 			System.out.println(nbReponse+" "+goodMap.get(nbReponse).size());
 		}
 		System.out.println(goodMap.keySet().stream().map(x -> goodMap.get(x).size()).mapToInt(Integer::intValue).sum()+" querries total");
+//		int[] tabInt = {1,6,11,16,20,30,40,50,60,70};
 
-		System.out.println("#Reponse #Requete");
+
+//		System.out.println("Experience de flitrage");
+		HashMap<Integer, List<StarQuery>> readyToMatchMapBonneClass = new HashMap<>();
+		int nbParClasses = 15;
+		int tailleClass = 5;
+		List<Query> listQueryParClass = new ArrayList<>();
+		for (Integer nbReponse : goodMap.keySet().stream().sorted().filter(x -> !x.equals(0)).toList()) {
+//			System.out.println();
+			int res = nbReponse/10;
+//			System.out.println(nbReponse+"                  "+res);
+			readyToMatchMapBonneClass.computeIfAbsent(res, k -> new ArrayList<>());
+			readyToMatchMapBonneClass.get(res).addAll(goodMap.get(nbReponse));
+//			while (j < tabInt.length) {
+//
+//				j++;
+//			}
+
+		}
+		for (Integer nbReponse : readyToMatchMapBonneClass.keySet().stream().sorted().toList()) {
+//			System.out.println(nbReponse+" "+readyToMatchMapBonneClass.get(nbReponse).size());
+			readyToMatchMapBonneClass.get(nbReponse);
+			Collections.shuffle(readyToMatchMapBonneClass.get(nbReponse));
+			List<StarQuery> list = readyToMatchMapBonneClass.get(nbReponse).stream().limit(nbParClasses).toList();
+
+			readyToMatchMapBonneClass.put(nbReponse, list);
+		}
+
+		System.out.println("#Reponse #Requete 3requetes par #Reponse");
 		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
 			System.out.println(nbReponse+" "+readyToMatchMap.get(nbReponse).size());
 		}
 		System.out.println(readyToMatchMap.keySet().stream().map(x -> readyToMatchMap.get(x).size()).mapToInt(Integer::intValue).sum()+" querries after filter");
-		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
-			for (StarQuery starQuery : readyToMatchMap.get(nbReponse)) {
-				System.out.println(starQuery.getLabel());
-			}
+//		System.out.println("print des requêtes");
+//		for (Integer nbReponse : readyToMatchMap.keySet().stream().sorted().toList()) {
+//			for (StarQuery starQuery : readyToMatchMap.get(nbReponse)) {
+//				System.out.println(starQuery.getLabel());
+//			}
+//		}
+		System.out.println("class #Requete 15 par classe");
+		List<StarQuery> allQueryFiltered = new ArrayList<>();
+		for (Integer nbReponse : readyToMatchMapBonneClass.keySet().stream().sorted().toList()) {
+			allQueryFiltered.addAll(readyToMatchMapBonneClass.get(nbReponse));
+			System.out.println(nbReponse+" "+readyToMatchMapBonneClass.get(nbReponse).size());
 		}
+		Collections.shuffle(allQueryFiltered);
+		for (StarQuery starQuery : allQueryFiltered) {
+			System.out.println(starQuery.getLabel());
+		}
+		System.out.println(allQueryFiltered.size()+" queries in total after filtration into classes");
 
 	}
 
@@ -247,7 +287,7 @@ public final class HistogrammeApplication {
 				starQueries.addAll(parseSparQLQueries(path));
 
 			} catch (Exception e) {
-//				System.err.println("path="+path);
+				System.err.println("path="+path);
 				throw new RuntimeException(e);
 			}
 		}
